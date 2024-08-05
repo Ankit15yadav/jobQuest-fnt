@@ -4,8 +4,12 @@ export const NavBarLinks = [
         path: "/",
     },
     {
-        title: "catalog",
-        path: "/abc"
+        title: "Job Listing",
+        path: "/dashboard/joblisting"
+    },
+    {
+        title: "Companies",
+        path: "/dashboard/companies"
     },
     {
         title: "About us",

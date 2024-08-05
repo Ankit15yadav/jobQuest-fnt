@@ -4,7 +4,7 @@ import Navbar from "./component/common/Navbar";
 
 function App() {
   return (
-    <div className=" bg-blue-200 text-black w-screen min-h-screen">
+    <div className=" bg-blue-200 text-black w-screen min-h-screen overflow-x-hidden" >
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
