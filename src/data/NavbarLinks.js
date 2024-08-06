@@ -9,7 +9,7 @@ export const NavBarLinks = [
     },
     {
         title: "Companies",
-        path: "/dashboard/companies"
+        path: "/companies"
     },
     {
         title: "About us",

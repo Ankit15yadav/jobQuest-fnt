@@ -4,6 +4,7 @@ import logo from "../../assets/logo/logofull.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import { login, sendOtp } from "../../services/operations/authAPI"
 
 const Login = () => {
 
@@ -34,7 +35,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData);
-        // dispatch(login(email, password, navigate));
+        dispatch(login(email, password, navigate));
     }
 
     return (
@@ -98,7 +99,7 @@ const Login = () => {
                                 className='w-[400px] rounded-[0.5rem] bg-blue-100 p-[12px] pr-12 text-richblack-5'
                             />
                         </label>
-                        <lablel className="">
+                        <label className="">
                             <p className=' mt-3'>Password <sup className=' text-red-600'>*</sup></p>
                             <input
                                 required
@@ -112,8 +113,7 @@ const Login = () => {
                                 }}
                                 className='w-[400px] rounded-[0.5rem] bg-blue-100 p-[12px] pr-12 text-richblack-5'
                             />
-                        </lablel>
-
+                        </label>
                         <div
                             onClick={() => navigate("/resetPassword")}
                             className='cursor-pointer text-sky-500 flex justify-end mt-1'>Forgot password?
