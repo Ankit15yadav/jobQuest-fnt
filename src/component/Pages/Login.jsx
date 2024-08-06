@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import loginImg from "../../assets/logo/job-portal-1.jpg"
-import logo from "../../assets/logo/logofull.png"
+import logo from "../../assets/logo/logo_bgi.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
@@ -51,7 +51,7 @@ const Login = () => {
             {/* form div */}
             <div className='w-[55%] flex flex-col'>
                 <div className='flex justify-between'>
-                    <img src={logo} width={80} height={80} />
+                    <img src={logo} width={100} height={100} />
                     <p className=' text-sm flex gap-x-1'>Don't have an account?
                         <Link to={"/signup"}>
                             <p className=' text-sky-500'>sign up</p>

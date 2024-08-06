@@ -1,7 +1,10 @@
 import React from 'react'
 import backgroundImg from "../../assets/logo/background_image_home.jpg"
+import { useSelector } from 'react-redux'
+import { setSignUpData } from '../../slice/authSlice';
 
 const Home = () => {
+
     return (
         <div className='text-black text-2xl text-center w-full'>
             {/* section 1 */}
@@ -23,8 +26,6 @@ const Home = () => {
                     </div>
                     {/* api call se created jobs show krne hai */}
                 </section>
-
-
             </div>
 
         </div>

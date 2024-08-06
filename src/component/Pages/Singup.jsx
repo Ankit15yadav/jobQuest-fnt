@@ -3,6 +3,9 @@ import { ACCOUNT_TYPE } from '../../utils/constants'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import Tab from '../common/Tab';
+import toast from 'react-hot-toast';
+import { setSignUpData } from '../../slice/authSlice';
+import { sendOtp } from '../../services/operations/authAPI';
 
 const Singup = () => {
 
@@ -34,6 +37,7 @@ const Singup = () => {
         }
     ]
 
+
     const handleOnChange = (e) => {
         setFormData((prevData) => ({
             ...prevData,
@@ -43,8 +47,33 @@ const Singup = () => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
         // dispatch signup krna hai
+
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match");
+            return;
+        }
+
+        const signupData = {
+            ...formData,
+            accountType,
+        }
+
+        console.log("data", signupData);
+
+        dispatch(setSignUpData(signupData));
+
+        dispatch(sendOtp(formData.email, navigate));
+
+        //reset krdo
+        setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        })
+        setAccountType(ACCOUNT_TYPE.JOBSEEKER);
     }
 
     return (
