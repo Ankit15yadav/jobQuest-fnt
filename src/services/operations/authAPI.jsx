@@ -76,3 +76,39 @@ export function login(email, password, navigate) {
         toast.dismiss(toastId);
     }
 }
+
+export function signup(
+    role,
+    firstName, lastName, email, password, confirmPassword, otp, navigate
+) {
+    return async (dispatch) => {
+        const toastId = toast.loading("Loading...");
+        dispatch(setLoading(true));
+        try {
+
+            console.log(role);
+            const response = await apiConnector("POST", SIGNUP_API, {
+                role,
+                firstName,
+                lastName,
+                email,
+                password,
+                confirmPassword,
+                otp,
+            })
+            console.log("SIGNUP API RESPONSE......", response);
+
+            if (!response.data.success) {
+                throw new Error(response.data.message);
+            }
+
+            toast.success("SignUp Successful")
+            navigate("/login");
+        } catch (error) {
+            console.log("SIGNUP API ERROR............", error)
+            toast.error("Signup Failed")
+        }
+        dispatch(setLoading(false))
+        toast.dismiss(toastId)
+    }
+}       

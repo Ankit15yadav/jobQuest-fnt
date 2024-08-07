@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import OTPInput from 'react-otp-input';
 import { IoArrowBackOutline } from "react-icons/io5";
 import { HiOutlineArrowPathRoundedSquare } from "react-icons/hi2";
+import { sendOtp } from '../../services/operations/authAPI';
+import { signup } from "../../services/operations/authAPI"
 
 
 
@@ -23,6 +25,31 @@ const VerifyEmail = () => {
         }
     }, []);
 
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+
+        const role = signupData.accountType;
+        const {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+
+        } = signupData
+
+        dispatch(signup(
+            role,
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            otp,
+            navigate
+        ))
+    }
+
     return (
         <div className='w-11/12 h-full mx-auto flex items-center justify-center'>
             {
@@ -34,7 +61,7 @@ const VerifyEmail = () => {
                         <p className=' text-xl  font-semibold'>Please check your email</p>
                         <p>We've sent a code to <span className=' text-blue-400'>
                             {signupData.email} </span> </p>
-                        <form>
+                        <form onSubmit={handleOnSubmit}>
                             <OTPInput
                                 value={otp}
                                 onChange={setOtp}
@@ -55,18 +82,22 @@ const VerifyEmail = () => {
                                 }}
                             />
 
-                            <button className=' bg-sky-300 w-full px-3 py-2 mt-4 rounded-xl'>
+                            <button type='submit' className=' bg-sky-300 w-full px-3 py-2 mt-4 rounded-xl'>
                                 Verify Email
                             </button>
 
                             <div className='flex justify-between'>
 
-                                <button className=' text-sm text-blue-400 flex items-center justify-center gap-1'>
+                                <button
+                                    onClick={() => navigate("/login")}
+                                    className=' text-sm text-blue-400 flex items-center justify-center gap-1'>
                                     <IoArrowBackOutline />
                                     Back to login
                                 </button>
 
-                                <button className=' text-sm text-pink-500 flex items-center justify-center gap-1'>
+                                <button
+                                    onClick={() => dispatch(sendOtp(signupData.email))}
+                                    className=' text-sm text-pink-500 flex items-center justify-center gap-1'>
                                     <HiOutlineArrowPathRoundedSquare />
                                     Resend OTP
                                 </button>

@@ -4,10 +4,9 @@ import logo from "../../assets/logo/logo_bgi.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
-import { login, sendOtp } from "../../services/operations/authAPI"
+import { login } from "../../services/operations/authAPI"
 
 const Login = () => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
@@ -39,33 +38,34 @@ const Login = () => {
     }
 
     return (
-        <div className='w-11/12 mx-auto flex mt-4 gap-x-10'>
-            {/* left div for image */}
-            {/* flex 1 use krne se full image cover hone lagi */}
-            <div className='w-[40%]'>
-                <img src={loginImg} alt='loginpageimage'
-                    className=' w-full h-[100%] object-fill mt-20 shadow-[-15px_15px_20px_skyblue] rounded-xl'
+        <div className='flex flex-col md:flex-row w-full md:w-11/12 mx-auto mt-4 gap-x-10'>
+            {/* Left section for image */}
+            <div className='w-full md:w-2/5'>
+                <img
+                    src={loginImg}
+                    alt='login page'
+                    className='w-full h-full object-cover mt-4 md:mt-20 rounded-xl shadow-md'
                 />
             </div>
 
-            {/* form div */}
-            <div className='w-[55%] flex flex-col'>
-                <div className='flex justify-between'>
-                    <img src={logo} width={100} height={100} />
-                    <p className=' text-sm flex gap-x-1'>Don't have an account?
-                        <Link to={"/signup"}>
-                            <p className=' text-sky-500'>sign up</p>
+            {/* Right section for form */}
+            <div className='w-full md:w-3/5 flex flex-col'>
+                <div className='flex justify-between items-center'>
+                    <img src={logo} width={80} height={80} alt='logo' className='mt-4 md:mt-0' />
+                    <p className='text-sm flex gap-x-1'>
+                        Don't have an account?
+                        <Link to="/signup">
+                            <span className='text-sky-500'>Sign up</span>
                         </Link>
                     </p>
                 </div>
 
+                {/* Description */}
+                <div className='flex flex-col items-center justify-center mt-8 md:mt-16'>
+                    <p className='text-white text-2xl md:text-3xl font-bold'>Login to JobQuest</p>
+                    <p className='mt-2 text-sky-700 text-center'>Now you can apply for your dream job here at JobQuest</p>
 
-                {/* description */}
-                <div className='flex flex-col items-center justify-center mt-16'>
-                    <p className='text-white text-3xl font-semibold'>Login to JobQuest</p>
-                    <p className='mt-2 text-sky-700'>Now you can apply for your dream job here in JobQuest</p>
-
-                    <GoogleOAuthProvider clientId='941938351661-lgi608344tc4p11b0bgjlb70ddsjqhm2.apps.googleusercontent.com' >
+                    <GoogleOAuthProvider clientId='941938351661-lgi608344tc4p11b0bgjlb70ddsjqhm2.apps.googleusercontent.com'>
                         <div className='w-fit mt-2 p-2 bg-sky-200 rounded-md'>
                             <GoogleLogin
                                 onSuccess={googleLoginSuccess}
@@ -74,61 +74,60 @@ const Login = () => {
                         </div>
                     </GoogleOAuthProvider>
 
-                    <div className='flex items-center justify-center gap-x-4'>
-                        <div className=''>__________________</div>
-                        <span className=' text-xl font-semibold'>OR</span>
-                        <div>__________________</div>
+                    <div className='flex items-center justify-center gap-x-4 mt-4'>
+                        <div className='border-t border-gray-300 w-1/4'>__________</div>
+                        <span className='text-xl font-semibold'>OR</span>
+                        <div className='border-t border-gray-300 w-1/4'>__________</div>
                     </div>
                 </div>
 
-                {/* form */}
-                <div className=' flex flex-col mt-5 justify-center items-center'>
-                    <form onSubmit={handleSubmit}>
-                        <label className=''>
-                            <p>Email Address <sup className=' text-red-600'>*</sup></p>
+                {/* Form */}
+                <div className='flex flex-col mt-5 justify-center items-center'>
+                    <form onSubmit={handleSubmit} className='w-full max-w-md'>
+                        <div className='mb-4'>
+                            <label className='block text-sm font-medium'>
+                                Email Address <sup className='text-red-600'>*</sup>
+                            </label>
                             <input
                                 required
-                                type='text'
+                                type='email'
                                 name='email'
                                 value={email}
                                 onChange={handleOnChange}
                                 placeholder='Enter Email address'
-                                style={{
-                                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                                }}
-                                className='w-[400px] rounded-[0.5rem] bg-blue-100 p-[12px] pr-12 text-richblack-5'
+                                className='w-full rounded-md bg-blue-100 p-3 text-richblack-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500'
                             />
-                        </label>
-                        <label className="">
-                            <p className=' mt-3'>Password <sup className=' text-red-600'>*</sup></p>
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-sm font-medium'>
+                                Password <sup className='text-red-600'>*</sup>
+                            </label>
                             <input
                                 required
-                                type='text'
+                                type='password'
                                 name='password'
                                 value={password}
                                 onChange={handleOnChange}
                                 placeholder='Enter Password'
-                                style={{
-                                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)"
-                                }}
-                                className='w-[400px] rounded-[0.5rem] bg-blue-100 p-[12px] pr-12 text-richblack-5'
+                                className='w-full rounded-md bg-blue-100 p-3 text-richblack-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500'
                             />
-                        </label>
+                        </div>
                         <div
                             onClick={() => navigate("/resetPassword")}
-                            className='cursor-pointer text-sky-500 flex justify-end mt-1'>Forgot password?
+                            className='cursor-pointer text-sky-500 text-sm flex justify-end mt-1'>
+                            Forgot password?
                         </div>
 
-                        <button type='submit' className='border border-yellow-100 px-10 py-2 w-fit mt-3 rounded-md bg-sky-700 text-white' >
+                        <button
+                            type='submit'
+                            className='w-full bg-sky-700 text-white font-medium py-3 mt-4 rounded-md hover:bg-sky-600 transition-colors duration-200'>
                             Login
                         </button>
                     </form>
-
                 </div>
             </div>
-
         </div>
     )
 }
 
-export default Login
+export default Login;
