@@ -5,7 +5,7 @@ import { NavBarLinks } from '../../data/NavbarLinks';
 import { ACCOUNT_TYPE } from '../../utils/constants';
 import { CiBookmarkCheck } from 'react-icons/ci';
 import { HiOutlineMenuAlt3, HiX } from 'react-icons/hi'; // Import menu icons
-import logo from '../../assets/logo/logo_half.png';
+import logo from '../../assets/logo/logoo_half_bgr2.png';
 import ProfileDropDown from '../Auth/ProfileDropDown';
 
 const Navbar = () => {
@@ -70,7 +70,7 @@ const Navbar = () => {
                     {token === null && (
                         <Link
                             to={'/login'}
-                            className='border border-blue-500 px-4 py-2 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200'
+                            className='border border-blue-500 px-3 py-1 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200'
                         >
                             Log in
                         </Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
                     {token === null && (
                         <Link
                             to={'/signup'}
-                            className='border border-blue-500 px-4 py-2 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200'
+                            className='border border-blue-500 px-3 py-1 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-200'
                         >
                             Sign up
                         </Link>
