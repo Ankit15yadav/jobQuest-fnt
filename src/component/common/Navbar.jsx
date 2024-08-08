@@ -5,6 +5,7 @@ import { NavBarLinks } from '../../data/NavbarLinks';
 import { ACCOUNT_TYPE } from '../../utils/constants';
 import { CiBookmarkCheck } from "react-icons/ci";
 import logo from "../../assets/logo/logo_half.png"
+import ProfileDropDown from '../Auth/ProfileDropDown';
 
 
 const Navbar = () => {
@@ -47,9 +48,9 @@ const Navbar = () => {
                 </nav>
 
                 {/* login and sign up buttons */}
-                <div className=' flex gap-x-3 '>
+                <div className=' flex gap-x-3 items-center justify-center'>
                     {
-                        user && user.accounttype !== ACCOUNT_TYPE.EMPLOYER &&
+                        user && user.role !== ACCOUNT_TYPE.EMPLOYER &&
                         (
                             <Link to={"/dashboard/wishlist"}>
                                 <CiBookmarkCheck className=' text-2xl text-blue-700' />
@@ -72,6 +73,11 @@ const Navbar = () => {
                             Sign up
                         </Link>
                     )}
+                    {
+                        token !== null && (
+                            <ProfileDropDown />
+                        )
+                    }
                 </div>
             </div>
         </div>

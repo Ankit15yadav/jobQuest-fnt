@@ -87,6 +87,10 @@ export function signup(
         try {
 
             console.log(role);
+            console.log("response Data",
+                role, firstName, lastName, email, password, confirmPassword, otp
+            )
+
             const response = await apiConnector("POST", SIGNUP_API, {
                 role,
                 firstName,
@@ -106,9 +110,21 @@ export function signup(
             navigate("/login");
         } catch (error) {
             console.log("SIGNUP API ERROR............", error)
-            toast.error("Signup Failed")
+            // toast.error("Signup Failed")
+            toast.error("Signup Failed: " + (error.response ? error.response.data.message : error.message));
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)
     }
-}       
+}
+
+export function logout(navigate) {
+    return (dispatch) => {
+        dispatch(setToken(null));
+        dispatch(setUser(null));
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        toast.success("Logged Out successfully");
+        navigate("/")
+    }
+}
