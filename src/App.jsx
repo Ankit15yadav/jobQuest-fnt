@@ -4,6 +4,7 @@ import Navbar from "./component/common/Navbar";
 import Login from "./component/Pages/Login";
 import Signup from "./component/Pages/Singup"
 import VerifyEmail from "./component/Pages/VerifyEmail";
+import Companies from "./component/Pages/Companies";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/companies" element={<Companies />} />
       </Routes>
     </div>
   );
