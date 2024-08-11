@@ -87,7 +87,7 @@ const Companies = () => {
                         key={index}
                         onMouseEnter={() => handleMouseEnter(index, company)}
                         onMouseLeave={handleMouseLeave}
-                        className={`flex justify-between mb-3 transition-all duration-300 border-b-4 border-b-gray-400 p-2 rounded-xl cursor-pointer hover:scale-105 hover:font-bold hover:text-gray-600`}
+                        className={`flex justify-between mb-3 transition-all duration-300 border-b-4 border-b-gray-400 p-2 rounded-xl hover:scale-105 hover:font-bold hover:text-gray-600`}
                     >
                         <div className='flex gap-x-3'>
                             <img
