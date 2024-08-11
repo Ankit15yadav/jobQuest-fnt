@@ -6,6 +6,8 @@ import Signup from "./component/Pages/Singup"
 import VerifyEmail from "./component/Pages/VerifyEmail";
 import Companies from "./component/Pages/Companies";
 import CreateCompany from "./component/Pages/CreateCompany";
+import React from "react";
+import { ThreeDCardDemo } from "./utils/test";
 
 function App() {
   return (
