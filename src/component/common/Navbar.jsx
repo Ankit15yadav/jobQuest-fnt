@@ -4,17 +4,16 @@ import { Link, matchPath, useLocation } from 'react-router-dom';
 import { NavBarLinks } from '../../data/NavbarLinks';
 import { ACCOUNT_TYPE } from '../../utils/constants';
 import { CiBookmarkCheck } from 'react-icons/ci';
-import { HiOutlineMenuAlt3, HiX } from 'react-icons/hi'; // Import menu icons
+import { HiOutlineMenuAlt3, HiX } from 'react-icons/hi';
 import logo from '../../assets/logo/logoo_half_bgr2.png';
 import ProfileDropDown from '../Auth/ProfileDropDown';
+import './Navbar.css'; // Import the CSS file for animations
 
 const Navbar = () => {
     const { token } = useSelector((state) => state.auth);
     const { user } = useSelector((state) => state.profile);
     const location = useLocation();
     const [loading, setLoading] = useState(false);
-
-    // State to manage mobile menu toggle
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const matchRoute = (route) => {
@@ -43,7 +42,7 @@ const Navbar = () => {
                         {NavBarLinks.map((link, index) => (
                             <li
                                 key={index}
-                                className='flex items-center justify-center mt-1'
+                                className={`flex items-center justify-center mt-1 navbar-item`}
                             >
                                 <Link to={link?.path}>
                                     <p
@@ -94,7 +93,7 @@ const Navbar = () => {
                         {NavBarLinks.map((link, index) => (
                             <li
                                 key={index}
-                                className='flex items-center justify-center mt-1'
+                                className='flex items-center justify-center mt-1 navbar-item'
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 <Link to={link?.path}>
@@ -114,7 +113,7 @@ const Navbar = () => {
                                 <CiBookmarkCheck className='text-2xl text-blue-700' />
                             </Link>
                         )}
-                        <div className=' lg: flex lg:flex-col xl:flex xl:flex-col gap-x-2 '>
+                        <div className='lg:flex lg:flex-col xl:flex xl:flex-col gap-x-2'>
                             {token === null && (
                                 <Link
                                     to={'/login'}
