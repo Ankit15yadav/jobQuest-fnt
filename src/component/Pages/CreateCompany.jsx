@@ -27,12 +27,29 @@ const CreateCompany = () => {
         }))
     }
 
+    const [imageFile, setImageFile] = useState(null);
+    const [preview, setPreview] = useState('');
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file && file.type === 'application/pdf') {
             setPdfFile(file);
         } else {
             toast.error("Please upload a valid pdf file")
+        }
+    };
+
+    const handleFileImgChange = (event) => {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            setImageFile(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please upload a valid image file.');
         }
     };
 
@@ -52,8 +69,20 @@ const CreateCompany = () => {
                     />
                 </div> */}
                 <div>
-
+                    <label htmlFor="image-upload">Upload Image:</label>
+                    <input
+                        type="file"
+                        id="image-upload"
+                        accept="image/*"
+                        onChange={handleFileImgChange}
+                    />
                 </div>
+                {preview && (
+                    <div>
+                        <h3>Image Preview:</h3>
+                        <img src={preview} alt="Preview" style={{ maxWidth: '300px', maxHeight: '300px' }} />
+                    </div>
+                )}
             </form>
         </div>
     )
