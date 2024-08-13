@@ -9,5 +9,6 @@ export const endpoints = {
 }
 
 export const companyEndPoints = {
-    GET_ALL_COMPANIES_API: BASE_URL + "/jobs/getCompany"
+    GET_ALL_COMPANIES_API: BASE_URL + "/jobs/getCompany",
+    CREATE_COMPANIES_API: BASE_URL + "/jobs/createCompany"
 }

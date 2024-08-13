@@ -1,88 +1,117 @@
-import React, { useState } from 'react'
-import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux';
+import Upload from '../common/Upload';
 
 const CreateCompany = () => {
 
-    const navigate = useNavigate();
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        getValues,
+        formState: { errors },
+    } = useForm();
+
     const dispatch = useDispatch();
-    const [pdfFile, setPdfFile] = useState(null);
-
-    const [formData, setFormData] = useState({
-        name: "",
-        description: "",
-        location: "",
-        industry: "",
-        website: "",
-        CompanyLogo: "",
-    })
-
-    const { name, description, location, industry, website, CompanyLogo } = formData;
-
-    const handleOnChange = (e) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            [e.target.name]: e.target.value,
-        }))
-    }
-
-    const [imageFile, setImageFile] = useState(null);
-    const [preview, setPreview] = useState('');
-
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file && file.type === 'application/pdf') {
-            setPdfFile(file);
-        } else {
-            toast.error("Please upload a valid pdf file")
-        }
-    };
-
-    const handleFileImgChange = (event) => {
-        const file = event.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            setImageFile(file);
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreview(reader.result);
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert('Please upload a valid image file.');
-        }
-    };
+    const { token } = useSelector((state) => state.auth);
 
     return (
-        <div className=' flex w-11/12 items-center justify-center mt-7'>
-            <form>
-                {/* <div className='flex flex-col '>
-                    <label className='font-bold text-[20px]'>
-                        Upload LOGO:
+        <div className=' w-11/12 mx-auto items-center '>
+            <form className=' w-[50%] mx-auto '>
+                {/* name */}
+                <div className="flex flex-col space-y-2">
+                    <label className="text-sm text-richblack-5">
+                        Name
                     </label>
                     <input
-                        type='file'
-                        id='pdf-upload'
-                        accept=''
-                        onChange={handleFileChange}
-                        className=' mt-2'
-                    />
-                </div> */}
-                <div>
-                    <label htmlFor="image-upload">Upload Image:</label>
-                    <input
-                        type="file"
-                        id="image-upload"
-                        accept="image/*"
-                        onChange={handleFileImgChange}
-                    />
+                        id='name'
+                        placeholder='Enter company name'
+                        {...register("name", { required: true })}
+                        className='w-full'
+                    />{
+                        errors.name && (
+                            <span>Name is required</span>
+                        )
+                    }
                 </div>
-                {preview && (
-                    <div>
-                        <h3>Image Preview:</h3>
-                        <img src={preview} alt="Preview" style={{ maxWidth: '300px', maxHeight: '300px' }} />
-                    </div>
-                )}
+
+                {/* desc */}
+                <div className="flex flex-col space-y-2">
+                    <label className="text-sm text-richblack-5">
+                        Description
+                    </label>
+                    <input
+                        id='description'
+                        placeholder='Enter short Description'
+                        className='w-full'
+                        {...register("description", { required: true })}
+                    />{
+                        errors.description && (
+                            <span>Description is required</span>
+                        )
+                    }
+                </div>
+                {/* location*/}
+                <div className="flex flex-col space-y-2">
+                    <label className="text-sm text-richblack-5">
+                        location
+                    </label>
+                    <input
+                        id='location'
+                        placeholder='Enter short Description'
+                        className='w-full'
+                        {...register("location", { required: true })}
+                    />{
+                        errors.location && (
+                            <span>location is required</span>
+                        )
+                    }
+                </div>
+
+                {/* industry */}
+                <div className="flex flex-col space-y-2">
+                    <label className="text-sm text-richblack-5">
+                        industry
+                    </label>
+                    <input
+                        id='industry'
+                        placeholder='Enter short Description'
+                        className='w-full'
+                        {...register("industry", { required: true })}
+                    />{
+                        errors.description && (
+                            <span>industry is required</span>
+                        )
+                    }
+                </div>
+
+                {/* website */}
+                <div className="flex flex-col space-y-2">
+                    <label className="text-sm text-richblack-5">
+                        website
+                    </label>
+                    <input
+                        id='website'
+                        placeholder='Enter short Description'
+                        className='w-full'
+                        {...register("website", { required: true })}
+                    />{
+                        errors.description && (
+                            <span>website is required</span>
+                        )
+                    }
+                </div>
+
+                <Upload
+                    name="logo"
+                    label="Company Logo"
+                    register={register}
+                    setValue={setValue}
+                    errors={errors}
+
+                />
+
             </form>
         </div>
     )

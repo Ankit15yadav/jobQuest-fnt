@@ -12,7 +12,7 @@ import JobListing from "./component/Pages/JobListing";
 
 function App() {
   return (
-    <div className=" bg-blue-200 text-black w-screen min-h-screen overflow-x-hidden" >
+    <div className=" bg-blue-200 text-black w-screen min-h-screen overflow-x-hidden " >
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
