@@ -29,36 +29,28 @@ export const getAllCompany = async () => {
     return result;
 }
 
-export function createCompany(
-    CompanyData
-) {
-    return async (dispatch) => {
-        const toastId = toast.loading("Loading...");
-        try {
+export const createCompany = async (data, token) => {
+    let result = null
+    const toastId = toast.loading("Loading...");
+    try {
+        console.log("form data in api", data)
+        const response = await apiConnector("POST", CREATE_COMPANIES_API, data, {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`
+        })
 
-            console.log("company info", CompanyData)
-            // console.log("company location", location)
-            // console.log("company industry", industry)
-            const response = await apiConnector("POST", CREATE_COMPANIES_API, {
-                CompanyData,
-            })
-
-            console.log("CREATE COMPANY RESPONSE.....", response);
-
-            if (!response.data.success) {
-                throw new Error(response.data.message);
-            }
-
-            toast.success("company Created successfully");
-
-
-        } catch (err) {
-
-            console.log("CREATE_COMPANY_ERROR...", err)
-            toast.error("creation failed")
+        console.log("COMPANY CREATED SUCCESSFULLY.....", response);
+        if (!response?.data?.success) {
+            throw new Error("Could not create company");
         }
-        dispatch(setLoading(false))
-        toast.dismiss(toastId);
-    }
 
+        toast.success("company created successfully");
+        result = response?.data?.data
+
+    } catch (err) {
+        console.log("CREATE COMPANY API ERROR....", err)
+        toast.error(err.message);
+    }
+    toast.dismiss(toastId);
+    return result;
 }
