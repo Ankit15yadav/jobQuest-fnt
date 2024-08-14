@@ -9,6 +9,8 @@ import CreateCompany from "./component/Pages/CreateCompany";
 import React from "react";
 import { ThreeDCardDemo } from "./utils/test";
 import JobListing from "./component/Pages/JobListing";
+import Profile from "./component/Pages/My-Profile";
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/dashboard/joblisting" element={<JobListing />} />
+        <Route path="/dashboard/my-profile" element={<Profile />} />
         <Route path="/create-company" element={<CreateCompany
         />} />
       </Routes>
