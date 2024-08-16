@@ -5,7 +5,8 @@ import { setLoading } from "../../slice/authSlice";
 
 const {
     GET_ALL_COMPANIES_API,
-    CREATE_COMPANIES_API
+    CREATE_COMPANIES_API,
+    GET_ALL_USER_COMPANIES_API,
 } = companyEndPoints
 
 export const getAllCompany = async () => {
@@ -49,6 +50,29 @@ export const createCompany = async (data, token) => {
 
     } catch (err) {
         console.log("CREATE COMPANY API ERROR....", err)
+        toast.error(err.message);
+    }
+    toast.dismiss(toastId);
+    return result;
+}
+
+export const getUserCompany = async () => {
+    const toastId = toast.loading("Loading...");
+    let result = []
+
+    try {
+
+        const response = await apiConnector("GET", GET_ALL_USER_COMPANIES_API)
+        if (!response?.data?.success) {
+            throw new Error("could not fetch company data");
+        }
+
+        console.log("USER_SPECIFIC_COMPANY_FOUND....", response);
+
+        result = response?.data?.data
+
+    } catch (err) {
+        console.log("GET_USER_COMPANY_API ERROR....", err);
         toast.error(err.message);
     }
     toast.dismiss(toastId);
