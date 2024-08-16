@@ -33,7 +33,7 @@ const ProfileDropDown = () => {
                     <div
                         onClick={(e) => e.stopPropagation()}
                         ref={ref}
-                        className=' z-10 absolute w-fit py-2 px-3 rounded-xl  bg-gray-300 -right-[15px] mt-1 flex flex-col gap-y-2 border-yellow-100 border'>
+                        className=' z-10 absolute w-fit py-2 px-3 rounded-xl  bg-gray-800 -right-[15px] mt-1 flex flex-col gap-y-2 border-yellow-100 border'>
                         <Link to={"/dashboard/my-profile"}
                             className='font-semibold'
                             onClick={() => setOpen(false)}

@@ -79,7 +79,11 @@ const Navbar = () => {
                             </Link>
                         </>
                     ) : (
-                        <ProfileDropDown />
+                        <div className=' flex items-center gap-x-2 font-semibold text-white'>
+                            <ProfileDropDown />
+                            <p> Hello {user.firstName} </p>
+                        </div>
+
                     )}
                 </div>
             </div>

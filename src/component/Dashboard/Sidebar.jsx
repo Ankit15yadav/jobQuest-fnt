@@ -30,7 +30,12 @@ const Sidebar = () => {
                         return <SidebarLink key={link.id} link={link} />;
                     })}
                 </div>
+
+                <div className=' w-full h-[0.1rem] bg-gray-400' />
+
             </motion.div>
+
+
 
             {/* Content Area */}
             <div className={`flex-1 ${isSidebarVisible ? 'ml-64' : ''} transition-all duration-300`}>

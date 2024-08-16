@@ -29,7 +29,9 @@ const SidebarLink = ({ link }) => {
                 ></motion.span>
                 <span>{link.name}</span>
             </div>
+
         </NavLink>
+
     );
 };
 
