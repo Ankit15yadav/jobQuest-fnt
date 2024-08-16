@@ -23,7 +23,7 @@ export const sidebarData = [
         id: 4,
         name: "Add Company",
         type: ACCOUNT_TYPE.EMPLOYER,
-        path: "/createCompany",
+        path: "dashboard/createCompany",
     },
     {
         id: 5,

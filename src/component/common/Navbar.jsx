@@ -18,7 +18,7 @@ const Navbar = () => {
     const matchRoute = (route) => matchPath({ path: route }, location.pathname);
 
     return (
-        <div className='w-full flex h-16 items-center justify-center bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 shadow-lg'>
+        <div className='w-11/12 mx-auto rounded-xl mt-2 mb-2 flex h-16 items-center justify-center bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 shadow-lg'>
             <div className='w-11/12 mx-auto max-w-maxContent flex justify-between items-center'>
                 {/* Logo */}
                 <Link to='/'>

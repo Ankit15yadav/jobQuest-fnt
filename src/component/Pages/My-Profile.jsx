@@ -3,8 +3,11 @@ import Sidebar from '../Dashboard/Sidebar'
 
 const Profile = () => {
     return (
-        <div>
-            <Sidebar />
+        <div className=' text-gray-300'>
+            { /* <Sidebar /> */}
+            {/* fjasldkfjsdkl */}
+
+            This is my profile page
         </div>
     )
 }

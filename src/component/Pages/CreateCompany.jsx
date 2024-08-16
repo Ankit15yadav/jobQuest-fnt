@@ -39,6 +39,8 @@ const CreateCompany = () => {
         if (result) {
             dispatch(setCompany(result));
         }
+
+
     }
 
     return (
