@@ -56,13 +56,17 @@ export const createCompany = async (data, token) => {
     return result;
 }
 
-export const getUserCompany = async () => {
+export const getUserCompany = async (data, token) => {
     const toastId = toast.loading("Loading...");
     let result = []
 
     try {
 
-        const response = await apiConnector("GET", GET_ALL_USER_COMPANIES_API)
+        const response = await apiConnector("GET", GET_ALL_USER_COMPANIES_API, data,
+            {
+                Authorization: `Bearer ${token}`
+            }
+        )
         if (!response?.data?.success) {
             throw new Error("could not fetch company data");
         }

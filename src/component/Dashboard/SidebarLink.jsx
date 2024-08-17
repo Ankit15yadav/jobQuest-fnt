@@ -14,8 +14,8 @@ const SidebarLink = ({ link }) => {
     return (
         <NavLink
             to={link.path}
-            className={`relative px-1 py-1 text-sm font-medium ${matchRoute(link.path)
-                ? "bg-yellow-200 text-yellow-300"
+            className={`px-1 py-2 flex flex-col  text-sm font-medium ${matchRoute(link.path)
+                ? "bg-gray-700 text-yellow-300 p-2 rounded-lg"
                 : "bg-opacity-0 text-white"
                 } transition-all duration-200`}
         >
