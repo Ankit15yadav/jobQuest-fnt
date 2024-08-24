@@ -17,7 +17,7 @@ export const sidebarData = [
         id: 3,
         name: "My Companies",
         type: ACCOUNT_TYPE.EMPLOYER,
-        path: "/dashboard/myCompany",
+        path: "/dashboard/myCompany/:userId",
     },
     {
         id: 4,

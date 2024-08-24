@@ -16,11 +16,19 @@ import CheckApplication from "./component/Pages/DashboardPages/CheckApplication"
 import DashEmployer from "./component/Pages/DashboardPages/DashEmployer";
 import JobsCreated from "./component/Pages/DashboardPages/JobsCreated";
 import MyCompnay from "./component/Pages/DashboardPages/MyCompnay";
+import { useSelector } from "react-redux";
+import Chatbot from "./component/Pages/Chatbot";
+import Createjobs from "./component/Auth/Createjobs";
 
 function App() {
+
+  const { user } = useSelector((state) => state.profile)
+
   return (
     <div className=" bg-gradient-to-r from-gray-800 via-gray-900 to-black text-black w-screen min-h-screen overflow-x-hidden " >
       <Navbar />
+      <Chatbot />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -35,11 +43,12 @@ function App() {
           <Route path="/dashboard/my-profile" element={<Profile />} />
           <Route path="/dashboard/createCompany" element={<CreateCompany />} />
           <Route path="/dashboard/Employer" element={<DashEmployer />} />
-          <Route path="/dashboard/myCompany" element={<MyCompnay />} />
+          <Route path={`/dashboard/myCompany/:userId`} element={<MyCompnay />} />
           <Route path="/dashboard/check-applications" element={<CheckApplication />} />
           <Route path="/dashboard/selected" element={<CandidatesSelected />} />
           <Route path="/dashboard/jobsCreated" element={<JobsCreated />} />
         </Route>
+        <Route path="/createJobs/:userId" element={<Createjobs />} />
 
       </Routes>
     </div>

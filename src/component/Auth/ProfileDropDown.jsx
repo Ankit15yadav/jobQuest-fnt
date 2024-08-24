@@ -4,19 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineCaretDown } from "react-icons/ai"
 import { logout } from "../../services/operations/authAPI"
 import useOnClickOutside from '../../hooks/useOnClickOutside';
+import ConfirmationModal from '../common/ConfirmationModal';
 
 const ProfileDropDown = () => {
 
     const { user } = useSelector((state) => state.profile);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [confirmModal, setConfirmModal] = useState(null);
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
 
     useOnClickOutside(ref, () => setOpen(false));
 
     if (!user) return null
-
 
 
     return (
@@ -44,7 +45,14 @@ const ProfileDropDown = () => {
                         <div
                             className=' font-semibold'
                             onClick={() => {
-                                dispatch(logout(navigate));
+                                setConfirmModal({
+                                    text1: "Are You Sure?",
+                                    text2: "You will be logged out",
+                                    btn1Text: "Logout",
+                                    btn2Text: "Cancel",
+                                    btn1Handler: () => dispatch(logout(navigate)),
+                                    btn2Handler: () => setConfirmModal(null)
+                                })
                                 setOpen(false);
                             }}
                         >
@@ -53,6 +61,7 @@ const ProfileDropDown = () => {
                     </div>
                 )
             }
+            {confirmModal && <ConfirmationModal modalData={confirmModal} />}
         </button>
     )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getUserCompany } from '../../../services/operations/CompanyAPI';
 import MyCompanyCard from '../../Auth/MyCompanyCard';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const MyCompnay = () => {
 
@@ -10,14 +10,14 @@ const MyCompnay = () => {
     const { token } = useSelector((state) => state.auth);
     const [companyData, setCompanyData] = useState([]);
     const navigate = useNavigate();
+    const { userId } = useParams();
 
-    // console.log(user._id);
-    const userId = user._id;
+    console.log("userId form params", userId);
     useEffect(() => {
 
         const getUserCompanies = async () => {
             try {
-                const result = await getUserCompany(userId, token);
+                const result = await getUserCompany(token);
                 if (result) {
                     setCompanyData(result);
                 }
@@ -37,7 +37,7 @@ const MyCompnay = () => {
                     companyData.length > 0 ? (
                         companyData?.map((company, index) => (
                             <div key={index}>
-                                <MyCompanyCard company={company} />
+                                <MyCompanyCard company={company} setCompanyData={setCompanyData} userId={userId} />
 
                             </div>
                         ))

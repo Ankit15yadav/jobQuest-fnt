@@ -14,12 +14,12 @@ const JobsCreated = () => {
     const navigate = useNavigate();
 
     // console.log(user._id);
-    const userId = user._id;
+    // const userId = user._id;
     useEffect(() => {
 
         const getUserCompanies = async () => {
             try {
-                const result = await getUserCompany(userId, token);
+                const result = await getUserCompany(token);
                 if (result) {
                     setCompanyData(result);
                 }
@@ -64,7 +64,9 @@ const JobsCreated = () => {
                                         (
                                             <div className=' flex justify-between text-gray-400 items-center'>
                                                 <p className=' mt-2 text-2xl font-semibold text-red-500'> No jobs created</p>
-                                                <button className=' bg-gray-700 px-6 py-2 rounded-xl'>
+                                                <button className=' bg-gray-700 px-6 py-2 rounded-xl'
+                                                    onClick={() => navigate(`${`/createJobs/${user._id}`}`)}
+                                                >
                                                     Create jobs
                                                 </button>
                                             </div>
@@ -74,7 +76,7 @@ const JobsCreated = () => {
                         ))
                     )
                     :
-                    ("")
+                    ("no companies")
             }
         </div>
     )

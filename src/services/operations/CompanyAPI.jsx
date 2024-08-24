@@ -7,6 +7,7 @@ const {
     GET_ALL_COMPANIES_API,
     CREATE_COMPANIES_API,
     GET_ALL_USER_COMPANIES_API,
+    DELETE_COMPANY_API,
 } = companyEndPoints
 
 export const getAllCompany = async () => {
@@ -56,13 +57,13 @@ export const createCompany = async (data, token) => {
     return result;
 }
 
-export const getUserCompany = async (data, token) => {
+export const getUserCompany = async (token) => {
     const toastId = toast.loading("Loading...");
     let result = []
 
     try {
-
-        const response = await apiConnector("GET", GET_ALL_USER_COMPANIES_API, data,
+        // console.log("data of company", data);
+        const response = await apiConnector("GET", GET_ALL_USER_COMPANIES_API, null,
             {
                 Authorization: `Bearer ${token}`
             }
@@ -81,4 +82,22 @@ export const getUserCompany = async (data, token) => {
     }
     toast.dismiss(toastId);
     return result;
+}
+export const deleteCompany = async (data, token) => {
+    const toastId = toast.loading("Loading...");
+
+    try {
+
+        await apiConnector("DELETE", DELETE_COMPANY_API, data, {
+            Authorization: `Bearer ${token}`
+        })
+
+        toast.success("course Deleted successfully");
+
+    } catch (err) {
+        console.log("Delete_company_api_error", err);
+        toast.error(err.message);
+    }
+    toast.dismiss(toastId);
+    return;
 }
