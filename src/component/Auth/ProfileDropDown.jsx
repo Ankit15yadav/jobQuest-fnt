@@ -5,6 +5,7 @@ import { AiOutlineCaretDown } from "react-icons/ai"
 import { logout } from "../../services/operations/authAPI"
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import ConfirmationModal from '../common/ConfirmationModal';
+import { motion, AnimatePresence } from "framer-motion";
 
 const ProfileDropDown = () => {
 
@@ -17,33 +18,38 @@ const ProfileDropDown = () => {
 
     useOnClickOutside(ref, () => setOpen(false));
 
-    if (!user) return null
-
+    if (!user) return null;
 
     return (
-        <button className='relative' onClick={() => setOpen(true)}>
-            <div className='flex items-center gap-x-1'>
-                <img src={user?.image}
+        <div className='relative'>
+            <button className='flex items-center gap-x-2 focus:outline-none' onClick={() => setOpen(!open)}>
+                <img
+                    src={user?.image}
                     alt={user?.firstName}
-                    className=' aspect-square w-[30px] rounded-full object-cover'
+                    className='aspect-square w-[30px] rounded-full object-cover'
                 />
-                <AiOutlineCaretDown className=' text-sm' />
-            </div>
-            {
-                open && (
-                    <div
+                <AiOutlineCaretDown className='text-sm text-gray-400' />
+            </button>
+
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
                         onClick={(e) => e.stopPropagation()}
                         ref={ref}
-                        className=' z-10 absolute w-fit py-2 px-3 rounded-xl  bg-gray-800 -right-[15px] mt-1 flex flex-col gap-y-2 border-yellow-100 border'>
-                        <Link to={"/dashboard/my-profile"}
-                            className='font-semibold'
+                        className='z-10 absolute w-fit py-2 px-4 rounded-lg bg-gray-800 shadow-lg right-0 mt-2 flex flex-col gap-y-2 border border-gray-700'
+                    >
+                        <Link
+                            to={"/dashboard/my-profile"}
+                            className='font-semibold text-gray-300 hover:text-white transition-colors duration-200'
                             onClick={() => setOpen(false)}
                         >
-
-                            < p className=' '> Dashboard </p>
+                            Dashboard
                         </Link>
                         <div
-                            className=' font-semibold'
+                            className='font-semibold text-gray-300 hover:text-red-500 transition-colors duration-200 cursor-pointer'
                             onClick={() => {
                                 setConfirmModal({
                                     text1: "Are You Sure?",
@@ -58,12 +64,13 @@ const ProfileDropDown = () => {
                         >
                             Logout
                         </div>
-                    </div>
-                )
-            }
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {confirmModal && <ConfirmationModal modalData={confirmModal} />}
-        </button>
+        </div>
     )
 }
 
-export default ProfileDropDown
+export default ProfileDropDown;

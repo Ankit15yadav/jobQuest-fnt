@@ -119,6 +119,7 @@ const CreateCompany = () => {
                         setValue={setValue}
                         errors={errors}
                         editData={null}
+                    // pdf={true}
                     />
 
                     <div className="flex justify-center">

@@ -6,7 +6,7 @@ import { NavBarLinks } from '../../data/NavbarLinks';
 import { ACCOUNT_TYPE } from '../../utils/constants';
 import { CiBookmarkCheck } from 'react-icons/ci';
 import { HiOutlineMenuAlt3, HiX } from 'react-icons/hi';
-import logo from '../../assets/logo/logoo_half_bgr2.png';
+import logo from '../../assets/logo/Screenshot 2024-09-02 223516.png';
 import ProfileDropDown from "../Auth/ProfileDropDown"
 
 const Navbar = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
     const matchRoute = (route) => matchPath({ path: route }, location.pathname);
 
     return (
-        <div className='w-11/12 mx-auto rounded-xl mt-2 mb-2 flex h-16 items-center justify-center bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 shadow-lg'>
+        <div className='w-11/12 mx-auto rounded-xl mt-2 mb-2 flex h-16 items-center justify-center    shadow-lg'>
             <div className='w-11/12 mx-auto max-w-maxContent flex justify-between items-center'>
                 {/* Logo */}
                 <Link to='/'>
@@ -27,7 +27,7 @@ const Navbar = () => {
                         alt='logo'
                         width={160}
                         height={32}
-                        className='hover:scale-105 transition-transform duration-300'
+                        className='hover:scale-105 transition-transform duration-300 '
                     />
                 </Link>
 
@@ -48,7 +48,7 @@ const Navbar = () => {
                             whileHover={{ scale: 1.1 }}
                         >
                             <Link to={link.path}>
-                                <p className={`${matchRoute(link.path) ? 'text-blue-400' : 'text-white'} font-semibold`}>
+                                <p className={`${matchRoute(link.path) ? 'text-cyan-200' : 'text-white'} font-serif`}>
                                     {link.title}
                                 </p>
                             </Link>
@@ -67,16 +67,18 @@ const Navbar = () => {
                         <>
                             <Link
                                 to='/login'
-                                className='border border-blue-400 px-3 py-1 rounded text-blue-400 hover:bg-blue-400 hover:text-white transition duration-200'
+                                className='border border-cyan-200 px-3 py-1 rounded-md text-cyan-300 font-serif hover:bg-cyan-300 hover:text-gray-900 transition duration-200'
                             >
                                 Log in
                             </Link>
+
                             <Link
                                 to='/signup'
-                                className='border border-blue-400 px-3 py-1 rounded text-blue-400 hover:bg-blue-400 hover:text-white transition duration-200'
+                                className='border border-cyan-200 px-3 py-1 rounded-md text-cyan-300 font-serif hover:bg-cyan-300 hover:text-gray-900 transition duration-200'
                             >
                                 Sign up
                             </Link>
+
                         </>
                     ) : (
                         <div className=' flex items-center gap-x-2 font-semibold text-white'>
@@ -92,7 +94,7 @@ const Navbar = () => {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        className='md:hidden absolute top-16 left-0 w-full bg-gray-900 shadow-lg z-[1000px]'
+                        className='md:hidden absolute top-16 left-0 w-full bg-gray-900 shadow-lg z-auto'
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
@@ -105,7 +107,7 @@ const Navbar = () => {
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     <Link to={link.path}>
-                                        <p className={`${matchRoute(link.path) ? 'text-blue-400' : 'text-white'} font-semibold`}>
+                                        <p className={`${matchRoute(link.path) ? 'text-cyan-400' : 'text-white'} font-semibold`}>
                                             {link.title}
                                         </p>
                                     </Link>

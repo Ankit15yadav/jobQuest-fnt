@@ -1,22 +1,36 @@
-import React from 'react'
+import React from 'react';
 
 const JobsCard = ({ job }) => {
     return (
-        <div className=' mx-auto flex justify-between border-b-4 border-gray-500 p-2 mt-2 rounded-xl'>
-            <div className='text-sm'>
-                <p className=' font-semibold text-gray-300'>  Title : <span className=' font-semibold text-gray-800'> {job.title}</span> </p>
-                <p className=' font-semibold  text-gray-300'> Job description : <span className=' font-semibold  text-gray-800'> {job.description}</span> </p>
-            </div>
-            <div>
-                <p className=' font-semibold  text-gray-300'> Requirements : <span className=' font-semibold  text-gray-800'>  {job.requirements}</span> </p>
-                <p className=' font-semibold  text-gray-300'> Salary : <span className=' font-semibold  text-gray-800'>{job.salary}</span> </p>
-            </div>
-            <div>
-                <p className=' font-semibold  text-gray-300'> Location : <span className=' font-semibold  text-gray-800'>{job.location}</span> </p>
-                <p className=' font-semibold  text-gray-300'> Job :<span className=' font-semibold  text-gray-800'>  {job.typeOfJob}</span> </p>
+        <div className='mx-auto border-b-4 border-gray-500 p-4 mt-4 rounded-xl bg-gray-800 shadow-lg'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                <div className='flex flex-col'>
+                    <p className='text-gray-400 font-semibold'>Title:</p>
+                    <p className='text-gray-100 font-bold'>{job.title}</p>
+                </div>
+                <div className='flex flex-col'>
+                    <p className='text-gray-400 font-semibold'>Job Description:</p>
+                    <p className='text-gray-100'>{job.description}</p>
+                </div>
+                <div className='flex flex-col'>
+                    <p className='text-gray-400 font-semibold'>Requirements:</p>
+                    <p className='text-gray-100'>{job.requirements}</p>
+                </div>
+                <div className='flex flex-col'>
+                    <p className='text-gray-400 font-semibold'>Salary:</p>
+                    <p className='text-gray-100'>{job.salary}</p>
+                </div>
+                <div className='flex flex-col'>
+                    <p className='text-gray-400 font-semibold'>Location:</p>
+                    <p className='text-gray-100'>{job.location}</p>
+                </div>
+                <div className='flex flex-col'>
+                    <p className='text-gray-400 font-semibold'>Job Type:</p>
+                    <p className='text-gray-100'>{job.type}</p>
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default JobsCard
+export default JobsCard;

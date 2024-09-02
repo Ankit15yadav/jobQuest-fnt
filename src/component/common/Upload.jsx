@@ -8,7 +8,8 @@ import { Player } from 'video-react';
 const Upload = ({
     name, label, register, setValue, errors,
     video = false, viewData = null,
-    editData = null
+    editData = null,
+    pdf = false  // New prop to handle PDF files
 
 }) => {
 
@@ -19,8 +20,8 @@ const Upload = ({
 
     const inputRef = useRef(null);
 
-    const onDrop = (acceptedfiles) => {
-        const file = acceptedfiles[0]
+    const onDrop = (acceptedFiles) => {
+        const file = acceptedFiles[0]
         if (file) {
             previewFile(file)
             setSelectedFile(file);
@@ -28,17 +29,23 @@ const Upload = ({
     }
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        accept: !video
-            ? { "image/*": [".jpeg", ".jpg", ".png"] }
-            : { "video/*": [".mp4"] },
+        accept: pdf
+            ? { "application/pdf": [".pdf"] }
+            : video
+                ? { "video/*": [".mp4"] }
+                : { "image/*": [".jpeg", ".jpg", ".png"] },
         onDrop,
     })
 
     const previewFile = (file) => {
         const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onloadend = () => {
-            setPreviewSource(reader.result)
+        if (pdf) {
+            setPreviewSource(file.name)  // Display file name for PDFs
+        } else {
+            reader.readAsDataURL(file)
+            reader.onloadend = () => {
+                setPreviewSource(reader.result)
+            }
         }
     }
 
@@ -61,7 +68,14 @@ const Upload = ({
             >
                 {previewSource ? (
                     <div className="flex w-full flex-col p-6">
-                        {!video ? (
+                        {pdf ? (
+                            <div className="flex flex-col items-center">
+                                <FiUploadCloud className="text-6xl text-gray-400" />
+                                <p className="mt-2 text-center text-sm text-richblack-200">
+                                    {previewSource} (PDF Preview)
+                                </p>
+                            </div>
+                        ) : !video ? (
                             <img
                                 src={previewSource}
                                 alt="Preview"
@@ -94,13 +108,19 @@ const Upload = ({
                             <FiUploadCloud className="text-2xl text-yellow-50" />
                         </div>
                         <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
-                            Drag and drop an {!video ? "image" : "video"}, or click to{" "}
+                            Drag and drop a{!pdf && !video ? "n image" : pdf ? " PDF" : " video"}, or click to{" "}
                             <span className="font-semibold text-gray-900">Browse</span> a
                             file
                         </p>
                         <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-gray-800">
-                            <li>Aspect ratio 16:9</li>
-                            <li>Recommended size 1024x576</li>
+                            {pdf ? (
+                                <li>Only PDF files are allowed</li>
+                            ) : (
+                                <>
+                                    <li>Aspect ratio 16:9</li>
+                                    <li>Recommended size 1024x576</li>
+                                </>
+                            )}
                         </ul>
                     </div>
                 )}

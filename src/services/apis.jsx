@@ -14,3 +14,7 @@ export const companyEndPoints = {
     GET_ALL_USER_COMPANIES_API: BASE_URL + "/jobs/getUserCompany",
     DELETE_COMPANY_API: BASE_URL + "/jobs/deleteCompany"
 }
+
+export const jobsEndPoints = {
+    CREATE_JOBS_API: BASE_URL + "/jobs/createJob",
+}

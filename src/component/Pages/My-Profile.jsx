@@ -1,9 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const { user } = useSelector((state) => state.profile);
     // console.log(user)
+
+    const navigate = useNavigate();
 
     return (
         <div className='w-11/12 mx-auto text-gray-300 flex flex-col gap-y-10'>
@@ -23,7 +26,9 @@ const Profile = () => {
                         <p className='text-sm'>{user.role}</p>
                     </div>
                 </div>
-                <div className='ml-auto'>
+                <div className='ml-auto'
+                    onClick={() => navigate("/dashboard/edit-my-Profile")}
+                >
                     <button className='bg-gray-500 font-semibold text-gray-300 px-6 py-2 rounded-xl '>Edit</button>
                 </div>
             </div>
@@ -33,7 +38,9 @@ const Profile = () => {
                 <div className=' p-4 w-[45%] bg-gray-800 rounded-xl flex flex-col justify-between gap-y-3 '>
                     <p className=' flex justify-center font-bold text-2xl'> About Yourself</p>
                     <p className=' bg-gray-500 h-[200px] rounded-2xl p-3'>{user.phoneNumber} </p>
-                    <div className=' flex justify-center'>
+                    <div className=' flex justify-center'
+                        onClick={() => navigate("/dashboard/edit-my-Profile")}
+                    >
                         <button className=' bg-gray-500 px-6 rounded-xl py-2 w-fit '>
                             Edit
                         </button>
@@ -49,8 +56,11 @@ const Profile = () => {
                         <p>Gender : <span className=' text-sm text-gray-500'>{user?.additionalDetails?.gender ? user?.additionalDetails?.gender : "null"}</span> </p>
                         <p>Date Of Birth : <span className=' text-sm text-gray-500'>{user?.additionalDetails?.dateOfBirth ? user?.additionalDetails?.dateOfBirth : "null"}</span> </p>
                     </div>
-                    <div className=' flex justify-center'>
-                        <button className=' bg-gray-500 px-6 rounded-xl py-2 w-fit '>
+                    <div className=' flex justify-center'
+                        onClick={() => navigate("/dashboard/edit-my-Profile")}
+                    >
+                        <button
+                            className=' bg-gray-500 px-6 rounded-xl py-2 w-fit '>
                             Edit
                         </button>
                     </div>

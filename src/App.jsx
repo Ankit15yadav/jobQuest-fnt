@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLoaderData, useLocation } from "react-router-dom";
 import Home from "./component/Pages/Home";
 import Navbar from "./component/common/Navbar";
 import Login from "./component/Pages/Login";
@@ -23,11 +23,15 @@ import Createjobs from "./component/Auth/Createjobs";
 function App() {
 
   const { user } = useSelector((state) => state.profile)
-
+  const { location } = useLocation();
   return (
-    <div className=" bg-gradient-to-r from-gray-800 via-gray-900 to-black text-black w-screen min-h-screen overflow-x-hidden " >
+    <div className=" bg-gradient-to-r from-black  to-black text-black w-screen min-h-screen overflow-x-hidden " >
+
+      {/* {
+        location.pathname !== "/" ? <Navbar /> : ""
+      } */}
       <Navbar />
-      <Chatbot />
+      {/* <Chatbot /> */}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -47,8 +51,9 @@ function App() {
           <Route path="/dashboard/check-applications" element={<CheckApplication />} />
           <Route path="/dashboard/selected" element={<CandidatesSelected />} />
           <Route path="/dashboard/jobsCreated" element={<JobsCreated />} />
+          <Route path="dashboard/edit-my-Profile" />
         </Route>
-        <Route path="/createJobs/:userId" element={<Createjobs />} />
+        <Route path="/createJobs/:userId/:companyId" element={<Createjobs />} />
 
       </Routes>
     </div>

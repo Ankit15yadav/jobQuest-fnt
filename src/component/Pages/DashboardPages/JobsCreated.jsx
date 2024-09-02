@@ -65,7 +65,7 @@ const JobsCreated = () => {
                                             <div className=' flex justify-between text-gray-400 items-center'>
                                                 <p className=' mt-2 text-2xl font-semibold text-red-500'> No jobs created</p>
                                                 <button className=' bg-gray-700 px-6 py-2 rounded-xl'
-                                                    onClick={() => navigate(`${`/createJobs/${user._id}`}`)}
+                                                    onClick={() => navigate(`${`/createJobs/${user._id}/${company._id}`}`)}
                                                 >
                                                     Create jobs
                                                 </button>

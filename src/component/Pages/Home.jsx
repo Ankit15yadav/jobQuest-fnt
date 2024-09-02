@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImg from '../../assets/andrew-kliatskyi-2bfHAKhGn4g-unsplash.jpg';
+import backgroundImg from '../../assets/logo/bright-light-black-background_23-2148132725.avif';
 
 const Home = () => {
     return (
@@ -9,13 +9,13 @@ const Home = () => {
                 <img
                     src={backgroundImg}
                     alt='Background'
-                    className='w-11/12 mx-auto mt-4 rounded-xl h-[500px] object-cover'
+                    className='w-full mx-auto mt-4 max-h-screen object-cover -z-50'
                 />
                 <div className='absolute top-1/3 left-[10%] md:left-[20%] lg:left-[30%] xl:left-[35%]'>
-                    <p className='text-white text-4xl md:text-5xl lg:text-6xl font-extrabold drop-shadow-lg'>
-                        FIND THE CAREER YOU DESERVE
+                    <p className='text-gray-200 text-4xl md:text-5xl lg:text-5xl font-extrabold drop-shadow-lg'>
+                        FIND THE <span className=' italic text-5xl font-cursive text-teal-400 '>CARRER</span> YOU DESERVE
                     </p>
-                    <p className='mt-4 text-white text-lg md:text-xl lg:text-2xl border-b-2 border-rose-100 inline-block'>
+                    <p className='mt-4  text-lg font-cursive md:text-2xl lg:text-4xl text-cyan-200 border-b-2 border-teal-200 inline-block'>
                         Your job search starts and ends with us
                     </p>
                 </div>
