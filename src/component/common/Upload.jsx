@@ -109,7 +109,7 @@ const Upload = ({
                         </div>
                         <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
                             Drag and drop a{!pdf && !video ? "n image" : pdf ? " PDF" : " video"}, or click to{" "}
-                            <span className="font-semibold text-gray-900">Browse</span> a
+                            <span className="font-semibold text-yellow-200">Browse</span> a
                             file
                         </p>
                         <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-gray-800">

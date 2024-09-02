@@ -74,16 +74,16 @@ const JobListing = () => {
 
     return (
         <motion.div
-            className=' mx-auto bg-gradient-to-b from-gray-900 to-gray-800 p-8 shadow-xl'
+            className='mx-auto bg-gradient-to-r from-black to-black p-8 shadow-xl rounded-lg'
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
         >
-            <div className=' w-11/12 mx-auto'>
+            <div className='w-11/12 mx-auto'>
                 {companyData?.map((company, index) => (
                     <motion.div
                         key={index}
-                        className='w-full bg-gray-700 p-6 rounded-lg mb-8 shadow-lg'
+                        className='w-full bg-gray-800 p-6 rounded-lg mb-8 shadow-lg'
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
@@ -93,11 +93,11 @@ const JobListing = () => {
                         >
                             <motion.img
                                 src={company.CompanyLogo}
-                                className='aspect-square w-24 h-24 rounded-full border-4 border-blue-500 shadow-md'
+                                className='aspect-square w-24 h-24 rounded-full border-4 border-blue-600 shadow-md'
                                 variants={itemVariants}
                             />
                             <motion.p
-                                className='font-bold text-[24px] text-gray-300 tracking-wide'
+                                className='font-bold text-2xl text-gray-200 tracking-wide'
                                 variants={itemVariants}
                             >
                                 {company.name}
@@ -108,13 +108,13 @@ const JobListing = () => {
                             company.jobsCreated.map((job, idx) => (
                                 <motion.div
                                     key={idx}
-                                    className='flex justify-between items-center mt-6 bg-gray-600 p-4 rounded-lg shadow-inner'
+                                    className='flex justify-between items-center mt-6 bg-gray-700 p-4 rounded-lg shadow-inner'
                                     variants={jobCardVariants}
                                 >
                                     <div className='w-[90%]'>
                                         <JobsCard
                                             job={job}
-                                            textColor='text-gray-300'
+                                            textColor='text-gray-200'
                                             titleColor='text-gray-100'
                                             labelColor='text-gray-400'
                                         />
@@ -133,7 +133,7 @@ const JobListing = () => {
                             ))
                         ) : (
                             <motion.div
-                                className='flex text-[20px] font-bold text-red-400 mt-4'
+                                className='flex text-xl font-bold text-red-500 mt-4'
                                 variants={noJobsMessageVariants}
                                 animate="visible"
                             >

@@ -72,7 +72,7 @@ const Companies = () => {
     };
 
     return (
-        <div className="w-full min-h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white">
+        <div className="w-full min-h-screen bg-gradient-to-r from-black  to-black text-white">
             <div className='w-11/12 mx-auto'>
                 {user && user?.role === "Employer" && (
                     <CardContainer className="inter-var max-w-6xl mx-auto border-b-4 border-gray-700 p-10 bg-gray-200 rounded-xl">
@@ -123,7 +123,7 @@ const Companies = () => {
                     animate="animate"
                 >
                     <motion.p
-                        className='mb-5 flex justify-center text-4xl font-bold text-gray-300'
+                        className='mb-5 flex justify-center text-5xl font-cursive bg-gradient-to-r from-white via-cyan-300 to-teal-600 bg-clip-text text-transparent'
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -136,32 +136,34 @@ const Companies = () => {
                             key={index}
                             onMouseEnter={() => handleMouseEnter(index, company)}
                             onMouseLeave={handleMouseLeave}
-                            className='flex justify-between mb-3 transition-all duration-300 border-b-4 border-b-gray-600 p-2 rounded-xl hover:bg-gray-700'
+                            className='flex flex-col justify-between mb-3 border-b-4 border-b-gray-600 p-4 rounded-xl bg-gray-800 hover:bg-gray-700 '
                             variants={cardVariants}
                             whileHover="hover"
                         >
-                            <div className='flex gap-x-3'>
+                            <div className='flex flex-col md:flex-row gap-4'>
                                 <img
                                     src={company.CompanyLogo}
                                     width={100} height={100}
-                                    className='rounded-xl'
+                                    className='rounded-xl flex-shrink-0'
                                     alt={`${company.name} logo`}
                                 />
-                                <div>
+                                <div className='flex-1'>
                                     <p className='text-[15px] font-bold uppercase text-gray-300'>{company.name}</p>
-                                    <p className='text-sm text-gray-400'>{company.description}</p>
+                                    <p className='text-sm text-gray-400 mt-2'>
+                                        {company.description}
+                                    </p>
                                 </div>
                             </div>
-                            <div className='flex items-center gap-x-1 text-gray-400'>
+                            <div className='flex items-center gap-x-2 mt-3 text-gray-400'>
                                 {user && user.role === "JobSeeker" ? (
                                     <button
-                                        className='w-fit bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-xl'>
+                                        className='w-full bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-xl text-center'>
                                         <Link to={"/dashboard/joblisting"}>
                                             Check for jobs
                                         </Link>
                                     </button>
                                 ) : (
-                                    <div className='flex items-center gap-x-1'>
+                                    <div className='flex items-center gap-x-2'>
                                         <TiLocationOutline />
                                         <p>{company.location}</p>
                                     </div>
