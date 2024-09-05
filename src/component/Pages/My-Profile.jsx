@@ -6,6 +6,8 @@ const Profile = () => {
     const { user } = useSelector((state) => state.profile);
     const navigate = useNavigate();
 
+    const userId = user._id;
+
     return (
         <div className='w-full max-w-7xl mx-auto text-gray-300 flex flex-col gap-y-10 px-4 sm:px-6 lg:px-8'>
             <h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold'>{user.firstName}'s Profile</h1>
@@ -27,7 +29,7 @@ const Profile = () => {
                 <div className='ml-auto'>
                     <button
                         className='border border-cyan-300 hover:bg-cyan-200 hover:text-gray-900 font-semibold text-gray-300 px-4 py-2 rounded-xl sm:px-6 sm:py-3'
-                        onClick={() => navigate("/dashboard/edit-my-Profile")}
+                        onClick={() => navigate(`/dashboard/edit-my-Profile/${userId}`)}
                     >
                         Edit
                     </button>

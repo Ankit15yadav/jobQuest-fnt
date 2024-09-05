@@ -44,15 +44,15 @@ const CreateJobs = () => {
     };
 
     return (
-        <div className="w-11/12 mx-auto min-h-screen flex mt-10 justify-center bg-gradient-to-r from-purple-300 via-blue-200 to-indigo-400 p-8">
+        <div className="w-11/12 mx-auto min-h-screen flex mt-10 justify-center bg-gradient-to-r from-black to-black p-8">
             <motion.form
                 onSubmit={handleSubmit(onSubmit)}
-                className="w-full max-w-xl bg-white rounded-lg p-6 shadow-md"
+                className="w-full max-w-xl bg-slate-800 rounded-lg p-6 shadow-lg"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <h2 className="text-3xl font-semibold text-gray-600 mb-6 text-center">
+                <h2 className="text-3xl font-semibold text-gray-300 mb-6 text-center">
                     Create Jobs for Your Company
                 </h2>
                 <div className="flex flex-col space-y-4">
@@ -84,15 +84,24 @@ const CreateJobs = () => {
                             className="flex flex-col space-y-2"
                             whileHover={{ scale: 1.02 }}
                         >
-                            <label className="text-gray-500 text-lg">
+                            <label className="text-gray-400 text-lg">
                                 {input.label} <sup className="text-red-500">*</sup>
                             </label>
-                            <input
-                                id={input.id}
-                                placeholder={input.placeholder}
-                                {...register(input.id, { required: true })}
-                                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                            />
+                            {
+                                input.id === "description" ? <textarea
+                                    id={input.id}
+                                    placeholder={input.placeholder}
+                                    {...register(input.id, { required: true })}
+                                    className="w-full p-2 border border-slate-700 bg-slate-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                /> :
+
+                                    <input
+                                        id={input.id}
+                                        placeholder={input.placeholder}
+                                        {...register(input.id, { required: true })}
+                                        className="w-full p-2 border border-slate-700 bg-slate-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    />
+                            }
                             {errors[input.id] && (
                                 <span className="text-red-500 text-sm">
                                     {input.label} is required
@@ -105,13 +114,13 @@ const CreateJobs = () => {
                         className="flex flex-col space-y-2"
                         whileHover={{ scale: 1.02 }}
                     >
-                        <label className="text-gray-500">
+                        <label className="text-gray-400">
                             Industry <sup className="text-red-500">*</sup>
                         </label>
                         <select
                             id="industry"
                             {...register('industry', { required: true })}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            className="w-full p-2 border border-slate-700 bg-slate-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                         >
                             <option value="" disabled>
                                 Select type of Industry
@@ -133,13 +142,13 @@ const CreateJobs = () => {
                         className="flex flex-col space-y-2"
                         whileHover={{ scale: 1.02 }}
                     >
-                        <label className="text-gray-500">
+                        <label className="text-gray-400">
                             Type of Job <sup className="text-red-500">*</sup>
                         </label>
                         <select
                             id="type"
                             {...register('type', { required: true })}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            className="w-full p-2 border border-slate-700 bg-slate-700 text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                         >
                             <option value="" disabled>
                                 Select an option

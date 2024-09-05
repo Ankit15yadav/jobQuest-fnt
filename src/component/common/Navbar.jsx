@@ -19,7 +19,7 @@ const Navbar = () => {
 
     return (
         <div className='w-11/12 mx-auto rounded-xl mt-2 mb-2 flex h-16 items-center justify-center    shadow-lg'>
-            <div className='w-11/12 mx-auto max-w-maxContent flex justify-between items-center'>
+            <div className='w-11/12 mx-auto max-w-maxContent flex justify-between items-center border-b py-2 border-b-cyan-200' >
                 {/* Logo */}
                 <Link to='/'>
                     <motion.img

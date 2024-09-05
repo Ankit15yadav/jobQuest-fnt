@@ -19,6 +19,7 @@ import MyCompnay from "./component/Pages/DashboardPages/MyCompnay";
 import { useSelector } from "react-redux";
 import Chatbot from "./component/Pages/Chatbot";
 import Createjobs from "./component/Auth/Createjobs";
+import EditMyProfile from "./component/Pages/EditMyProfile";
 
 function App() {
 
@@ -52,6 +53,8 @@ function App() {
           <Route path="/dashboard/selected" element={<CandidatesSelected />} />
           <Route path="/dashboard/jobsCreated" element={<JobsCreated />} />
           <Route path="dashboard/edit-my-Profile" />
+          <Route path="/dashboard/edit-my-profile/:userId" element={<EditMyProfile />} />
+
         </Route>
         <Route path="/createJobs/:userId/:companyId" element={<Createjobs />} />
 

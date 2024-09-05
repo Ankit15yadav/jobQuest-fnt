@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { getAllCompany } from '../../services/operations/CompanyAPI';
 import JobsCard from '../common/JobsCard';
 import { motion } from 'framer-motion';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const JobListing = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [companyData, setCompanyData] = useState([]);
+    const [expandedCompany, setExpandedCompany] = useState(null); // Track expanded company
     const { user } = useSelector((state) => state.profile);
 
     useEffect(() => {
@@ -22,6 +24,10 @@ const JobListing = () => {
         };
         fetchCompany();
     }, []);
+
+    const toggleCompanyJobs = (index) => {
+        setExpandedCompany(expandedCompany === index ? null : index);
+    };
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -89,55 +95,74 @@ const JobListing = () => {
                         animate="visible"
                     >
                         <motion.div
-                            className='flex gap-x-5 items-center'
+                            className='flex justify-between items-center cursor-pointer'
+                            onClick={() => toggleCompanyJobs(index)}
                         >
-                            <motion.img
-                                src={company.CompanyLogo}
-                                className='aspect-square w-24 h-24 rounded-full border-4 border-blue-600 shadow-md'
-                                variants={itemVariants}
-                            />
-                            <motion.p
-                                className='font-bold text-2xl text-gray-200 tracking-wide'
-                                variants={itemVariants}
+                            <div className='flex gap-x-5 items-center'>
+                                <motion.img
+                                    src={company.CompanyLogo}
+                                    className='aspect-square w-24 h-24 rounded-full border-4 border-blue-600 shadow-md'
+                                    variants={itemVariants}
+                                />
+                                <motion.p
+                                    className='font-bold text-2xl text-gray-200 tracking-wide'
+                                    variants={itemVariants}
+                                >
+                                    {company.name}
+                                </motion.p>
+                            </div>
+                            <motion.div
+                                className='text-gray-200'
+                                initial={{ rotate: expandedCompany === index ? 0 : -90 }}
+                                animate={{ rotate: expandedCompany === index ? 90 : 0 }}
+                                transition={{ duration: 0.3 }}
                             >
-                                {company.name}
-                            </motion.p>
+                                {expandedCompany === index ? <FaChevronUp /> : <FaChevronDown />}
+                            </motion.div>
                         </motion.div>
 
-                        {company.jobsCreated.length > 0 ? (
-                            company.jobsCreated.map((job, idx) => (
-                                <motion.div
-                                    key={idx}
-                                    className='flex justify-between items-center mt-6 bg-gray-700 p-4 rounded-lg shadow-inner'
-                                    variants={jobCardVariants}
-                                >
-                                    <div className='w-[90%]'>
-                                        <JobsCard
-                                            job={job}
-                                            textColor='text-gray-200'
-                                            titleColor='text-gray-100'
-                                            labelColor='text-gray-400'
-                                        />
-                                    </div>
-                                    {user && user.role === "JobSeeker" && (
-                                        <motion.div
-                                            whileHover="hover"
-                                            variants={buttonVariants}
-                                        >
-                                            <button className='text-white bg-blue-500 border-b-4 border-blue-700 px-8 py-3 w-fit rounded-full shadow-lg hover:bg-blue-600'>
-                                                Apply
-                                            </button>
-                                        </motion.div>
-                                    )}
-                                </motion.div>
-                            ))
-                        ) : (
+                        {expandedCompany === index && (
                             <motion.div
-                                className='flex text-xl font-bold text-red-500 mt-4'
-                                variants={noJobsMessageVariants}
+                                initial="hidden"
                                 animate="visible"
+                                variants={containerVariants}
                             >
-                                <p>No jobs created</p>
+                                {company.jobsCreated.length > 0 ? (
+                                    company.jobsCreated.map((job, idx) => (
+                                        <motion.div
+                                            key={idx}
+                                            className='flex justify-between items-center mt-6 bg-gray-700 p-4 rounded-lg shadow-inner'
+                                            variants={jobCardVariants}
+                                        >
+                                            <div className='w-[90%]'>
+                                                <JobsCard
+                                                    job={job}
+                                                    textColor='text-gray-200'
+                                                    titleColor='text-gray-100'
+                                                    labelColor='text-gray-400'
+                                                />
+                                            </div>
+                                            {user && user.role === "JobSeeker" && (
+                                                <motion.div
+                                                    whileHover="hover"
+                                                    variants={buttonVariants}
+                                                >
+                                                    <button className='text-white bg-blue-500 border-b-4 border-blue-700 px-8 py-3 w-fit rounded-full shadow-lg hover:bg-blue-600'>
+                                                        Apply
+                                                    </button>
+                                                </motion.div>
+                                            )}
+                                        </motion.div>
+                                    ))
+                                ) : (
+                                    <motion.div
+                                        className='flex text-xl font-bold text-red-500 mt-4'
+                                        variants={noJobsMessageVariants}
+                                        animate="visible"
+                                    >
+                                        <p>No jobs created</p>
+                                    </motion.div>
+                                )}
                             </motion.div>
                         )}
                     </motion.div>
